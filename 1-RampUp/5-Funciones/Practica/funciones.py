@@ -1,5 +1,3 @@
-import math
-
 def conversion(num):
     if num == 1:
         return "Lunes"
@@ -94,5 +92,6 @@ def triangulo(base, altura):
     return area
 
 def circulo(radio):
+    import math
     area = math.pi * radio**2
     return area
