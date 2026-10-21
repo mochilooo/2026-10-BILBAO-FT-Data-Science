@@ -192,31 +192,26 @@ tablero_maquina = Tablero("Máquina")
 tablero_usuario.colocar_barcos()
 tablero_maquina.colocar_barcos()
 
-
+# Repetimos los disparos hasta que el usuario falle
 while True:
 
-    # Turno del usuario
-    print("\n--- TU TURNO ---")
+    print("\nIntroduce las coordenadas para disparar")
 
+    # Pedimos las coordenadas al usuario
     fila = int(input("Fila (0-9): "))
     columna = int(input("Columna (0-9): "))
 
+    # El usuario dispara contra el tablero de la máquina
     resultado = tablero_maquina.disparar(fila, columna)
 
+    # Mostramos los disparos realizados
     print("\nTus disparos:")
     tablero_maquina.imprimirtablero(tablero_maquina.disparos)
 
-    # Si fallas, empieza el turno de la máquina
-    if resultado is False:
-
-        print("\n--- TURNO DE LA MÁQUINA ---")
-
-        resultado_maquina = tablero_usuario.disparar_maquina(tablero_usuario)
-
-        # Si la máquina falla, vuelve a empezar el bucle
-        if resultado_maquina is False:
-            print("La máquina ha fallado. Te toca.")
-
+    # Si el disparo es agua, termina el turno
+    if resultado == False:
+        print("Has fallado. Ahora dispara la máquina.")
+        tablero_usuario.disparo_maquina(tablero_usuario)
 
 print("Tablero real de la máquina:")
 tablero_maquina.imprimirtablero(tablero_maquina.tablero)
