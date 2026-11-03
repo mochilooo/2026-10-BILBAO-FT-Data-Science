@@ -1,0 +1,68 @@
+SELECT *
+FROM customers
+WHERE customers.Country = "Brazil";
+
+SELECT *
+FROM employees
+WHERE employees.Title = "Sales Support Agent";
+
+SELECT *
+FROM tracks
+WHERE tracks.Composer = "AC/DC";
+
+SELECT FirstName, LastName, CustomerId, Country
+FROM customers
+WHERE customers.Country != "USA";
+
+SELECT FirstName, LastName, City, State, Country, Email
+FROM employees
+WHERE employees.Title = "Sales Support Agent";
+
+SELECT DISTINCT BillingCountry
+FROM invoices;
+
+SELECT DISTINCT State, count(CustomerId)
+FROM customers
+WHERE customers.Country == "USA"
+GROUP BY State;
+
+SELECT sum(Quantity) as Numero_Articulos
+FROM invoice_items
+WHERE invoice_items.InvoiceId == 37;
+
+SELECT count(TrackId) as Cantidad_Canciones
+FROM tracks as t
+WHERE t.Composer = "AC/DC";
+
+SELECT InvoiceId, sum(Quantity)
+FROM invoice_items
+GROUP BY InvoiceId;
+
+SELECT BillingCountry, count(InvoiceId)
+FROM invoices
+GROUP BY BillingCountry;
+
+SELECT strftime("%Y", invoicedate) as anyo, count(InvoiceId)
+FROM invoices
+WHERE anyo in ("2009", "2011") 
+group by anyo;
+
+SELECT  count(InvoiceId) as Facturas_Totales
+FROM invoices
+WHERE strftime("%Y", invoicedate)  between ("2009") and  ("2011");
+
+SELECT Country, count(CustomerId)
+FROM customers
+WHERE customers.Country in ("Brazil", "Spain") 
+group by Country;
+
+SELECT *
+FROM tracks
+WHERE tracks.Name LIKE "You%";
+
+SELECT C.FirstName, InvoiceId, InvoiceDate, BillingCountry
+FROM invoices as I
+INNER JOIN customers as C
+ON C.CustomerId = I.CustomerId
+WHERE I.BillingCountry = "Brazil";
+
